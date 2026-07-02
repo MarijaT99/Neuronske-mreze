@@ -1,0 +1,77 @@
+{
+  "best_epoch": 2,
+  "best_score": 1.0,
+  "monitor": "macro_f1",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.45680704983370796,
+      "val_macro_f1": 0.9928246798396987,
+      "val_macro_precision": 0.9937287775891341,
+      "val_macro_recall": 0.9921052631578947,
+      "val_weighted_f1": 0.9936713954364695,
+      "val_balanced_accuracy": 0.9921052631578947,
+      "val_accuracy": 0.9936974789915967
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.04278780001777786,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.01839076563556519,
+      "val_macro_f1": 0.998172198172198,
+      "val_macro_precision": 0.998991935483871,
+      "val_macro_recall": 0.9973684210526316,
+      "val_weighted_f1": 0.997895723946144,
+      "val_balanced_accuracy": 0.9973684210526316,
+      "val_accuracy": 0.9978991596638656
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.018124889273632754,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.014058099597323317,
+      "val_macro_f1": 0.9963241653693133,
+      "val_macro_precision": 0.9947368421052631,
+      "val_macro_recall": 0.9979757085020243,
+      "val_weighted_f1": 0.9958121286916427,
+      "val_balanced_accuracy": 0.9979757085020243,
+      "val_accuracy": 0.9957983193277311
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.012741512010662674,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0066058671395588025,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    }
+  ]
+}

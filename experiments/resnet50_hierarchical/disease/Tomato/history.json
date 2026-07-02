@@ -1,0 +1,127 @@
+{
+  "best_epoch": 8,
+  "best_score": 0.9970923492455308,
+  "monitor": "macro_f1",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4015148853500653,
+      "val_macro_f1": 0.9865019500046304,
+      "val_macro_precision": 0.9873998755395588,
+      "val_macro_recall": 0.9857523854512659,
+      "val_weighted_f1": 0.9892999619190235,
+      "val_balanced_accuracy": 0.9857523854512659,
+      "val_accuracy": 0.9893577981651376
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.06442102020991824,
+      "val_macro_f1": 0.9879064249335731,
+      "val_macro_precision": 0.9868752365628284,
+      "val_macro_recall": 0.9890663146199816,
+      "val_weighted_f1": 0.9904652156529616,
+      "val_balanced_accuracy": 0.9890663146199816,
+      "val_accuracy": 0.9904587155963303
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0437266744019641,
+      "val_macro_f1": 0.9922670217302884,
+      "val_macro_precision": 0.9903637779590486,
+      "val_macro_recall": 0.9944584038810774,
+      "val_weighted_f1": 0.9945218560240893,
+      "val_balanced_accuracy": 0.9944584038810774,
+      "val_accuracy": 0.9944954128440368
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.028362526708699463,
+      "val_macro_f1": 0.9938524352714438,
+      "val_macro_precision": 0.9932799739660331,
+      "val_macro_recall": 0.994451908265321,
+      "val_weighted_f1": 0.9948668128078526,
+      "val_balanced_accuracy": 0.994451908265321,
+      "val_accuracy": 0.9948623853211009
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.02333865388458482,
+      "val_macro_f1": 0.9902861658950602,
+      "val_macro_precision": 0.9903931058290164,
+      "val_macro_recall": 0.9903428434572998,
+      "val_weighted_f1": 0.9915526495237565,
+      "val_balanced_accuracy": 0.9903428434572998,
+      "val_accuracy": 0.9915596330275229
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.026271216313000754,
+      "val_macro_f1": 0.9945038913923476,
+      "val_macro_precision": 0.9944626805677226,
+      "val_macro_recall": 0.9945921216640843,
+      "val_weighted_f1": 0.9956028980377997,
+      "val_balanced_accuracy": 0.9945921216640843,
+      "val_accuracy": 0.9955963302752293
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.015307030633068479,
+      "val_macro_f1": 0.9969063632397293,
+      "val_macro_precision": 0.9966146929950899,
+      "val_macro_recall": 0.997220141863232,
+      "val_weighted_f1": 0.9974338044524237,
+      "val_balanced_accuracy": 0.997220141863232,
+      "val_accuracy": 0.9974311926605505
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.01616865433745209,
+      "val_macro_f1": 0.9970923492455308,
+      "val_macro_precision": 0.9970427019625603,
+      "val_macro_recall": 0.997150144766757,
+      "val_weighted_f1": 0.9974319627017109,
+      "val_balanced_accuracy": 0.997150144766757,
+      "val_accuracy": 0.9974311926605505
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.016567387612958614,
+      "val_macro_f1": 0.9959330319531136,
+      "val_macro_precision": 0.9955186086573196,
+      "val_macro_recall": 0.9963699038605058,
+      "val_weighted_f1": 0.9970630088663477,
+      "val_balanced_accuracy": 0.9963699038605058,
+      "val_accuracy": 0.9970642201834863
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0145066324308922,
+      "val_macro_f1": 0.9950135427401003,
+      "val_macro_precision": 0.9950697042233697,
+      "val_macro_recall": 0.9950293798946401,
+      "val_weighted_f1": 0.9966902734745139,
+      "val_balanced_accuracy": 0.9950293798946401,
+      "val_accuracy": 0.996697247706422
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.01383179932743689,
+      "val_macro_f1": 0.9951529946967181,
+      "val_macro_precision": 0.9944014620543344,
+      "val_macro_recall": 0.9959529649615323,
+      "val_weighted_f1": 0.9945170157786023,
+      "val_balanced_accuracy": 0.9959529649615323,
+      "val_accuracy": 0.9944954128440368
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.014571246144747953,
+      "val_macro_f1": 0.987843059544581,
+      "val_macro_precision": 0.9885248837229795,
+      "val_macro_recall": 0.9875091509608026,
+      "val_weighted_f1": 0.9897106888123043,
+      "val_balanced_accuracy": 0.9875091509608026,
+      "val_accuracy": 0.9897247706422019
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "best_epoch": 1,
+  "best_score": 1.0,
+  "monitor": "macro_f1",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.33405451781251344,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.023623622923764583,
+      "val_macro_f1": 1.0,
+      "val_macro_precision": 1.0,
+      "val_macro_recall": 1.0,
+      "val_weighted_f1": 1.0,
+      "val_balanced_accuracy": 1.0,
+      "val_accuracy": 1.0
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.014180164293971557,
+      "val_macro_f1": 0.9986933650093331,
+      "val_macro_precision": 0.9985955056179775,
+      "val_macro_recall": 0.9987980769230769,
+      "val_weighted_f1": 0.9983609895597165,
+      "val_balanced_accuracy": 0.9987980769230769,
+      "val_accuracy": 0.9983606557377049
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.01645245534530284,
+      "val_macro_f1": 0.9960831790343256,
+      "val_macro_precision": 0.9958333333333333,
+      "val_macro_recall": 0.9963942307692308,
+      "val_weighted_f1": 0.9950847691118682,
+      "val_balanced_accuracy": 0.9963942307692308,
+      "val_accuracy": 0.9950819672131147
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.013185796044873658,
+      "val_macro_f1": 0.9986933650093331,
+      "val_macro_precision": 0.9985955056179775,
+      "val_macro_recall": 0.9987980769230769,
+      "val_weighted_f1": 0.9983609895597165,
+      "val_balanced_accuracy": 0.9987980769230769,
+      "val_accuracy": 0.9983606557377049
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.010899894890383949,
+      "val_macro_f1": 0.9986933650093331,
+      "val_macro_precision": 0.9985955056179775,
+      "val_macro_recall": 0.9987980769230769,
+      "val_weighted_f1": 0.9983609895597165,
+      "val_balanced_accuracy": 0.9987980769230769,
+      "val_accuracy": 0.9983606557377049
+    }
+  ]
+}
