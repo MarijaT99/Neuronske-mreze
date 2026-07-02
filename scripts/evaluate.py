@@ -1,4 +1,4 @@
-"""Evaluacija na TEST skupu - flat model i hijerarhija (end-to-end).
+"""Evaluacija na TEST skupu - flat modeli i hijerarhija (end-to-end).
 
 Učitava najbolje sačuvane modele (best_model.pt), računa test metrike, matricu
 konfuzije i per-class F1. Rezultati -> results/ i experiments/.../test_metrics.json.
@@ -30,6 +30,15 @@ from src.models.hierarchical import HierarchicalClassifier  # noqa: E402
 RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
 
+# Flat modeli koje evaluiramo na test skupu: (ime_modela, ime_eksperimenta)
+FLAT_MODELS = [
+    ("baseline_cnn", "baseline_cnn_flat"),
+    ("resnet50", "resnet50_flat"),
+    ("efficientnet_b0", "efficientnet_b0_flat"),
+]
+# Za koji flat model čuvamo konfuzionu matricu i per-class F1 (glavni/napredni)
+MAIN_FLAT = "resnet50"
+
 
 def load_maps():
     m = json.loads((ROOT / "data/splits/label_maps.json").read_text(encoding="utf-8"))
@@ -46,10 +55,15 @@ def load_model(name, num_classes, path, device):
 
 
 @torch.no_grad()
-def evaluate_flat(data_root, device):
+def evaluate_flat(model_name, exp_name, data_root, device):
+    weights = ROOT / f"experiments/{exp_name}/best_model.pt"
+    if not weights.exists():
+        print(f"[preskačem] nema težina: {weights}")
+        return None
+
     ds = build_dataset(data_root, "data/splits", "test", target="flat")
     loader = build_loader(ds, batch_size=64, num_workers=2)
-    model = load_model("resnet50", 38, "experiments/resnet50_flat/best_model.pt", device)
+    model = load_model(model_name, 38, str(weights), device)
 
     y_true, y_pred = [], []
     for x, y in loader:
@@ -58,19 +72,21 @@ def evaluate_flat(data_root, device):
     y_true, y_pred = np.array(y_true), np.array(y_pred)
 
     metrics = compute_metrics(y_true, y_pred)
-    print("FLAT test:", {k: round(v, 4) for k, v in metrics.items()})
+    print(f"FLAT test [{model_name}]:", {k: round(v, 4) for k, v in metrics.items()})
 
-    _, _, id2class, _ = load_maps()
-    per = f1_score(y_true, y_pred, average=None, zero_division=0)
-    pd.DataFrame({"class": [id2class[i] for i in range(38)], "f1": per}).to_csv(
-        RESULTS / "per_class_f1.csv", index=False, encoding="utf-8")
+    # konfuzionu matricu i per-class F1 čuvamo samo za glavni flat model
+    if model_name == MAIN_FLAT:
+        _, _, id2class, _ = load_maps()
+        per = f1_score(y_true, y_pred, average=None, zero_division=0)
+        pd.DataFrame({"class": [id2class[i] for i in range(38)], "f1": per}).to_csv(
+            RESULTS / "per_class_f1.csv", index=False, encoding="utf-8")
 
-    cm = confusion_matrix(y_true, y_pred)
-    plt.figure(figsize=(12, 10))
-    plt.imshow(cm, cmap="Blues"); plt.colorbar()
-    plt.title("Konfuziona matrica (flat, test)")
-    plt.xlabel("predvidjeno"); plt.ylabel("stvarno")
-    plt.savefig(RESULTS / "confusion_flat.png", dpi=120, bbox_inches="tight"); plt.close()
+        cm = confusion_matrix(y_true, y_pred)
+        plt.figure(figsize=(12, 10))
+        plt.imshow(cm, cmap="Blues"); plt.colorbar()
+        plt.title("Konfuziona matrica (flat, test)")
+        plt.xlabel("predvidjeno"); plt.ylabel("stvarno")
+        plt.savefig(RESULTS / "confusion_flat.png", dpi=120, bbox_inches="tight"); plt.close()
     return metrics
 
 
@@ -132,13 +148,19 @@ def main():
     ap.add_argument("--device", default="cuda")
     args = ap.parse_args()
 
-    flat = evaluate_flat(args.data_root, args.device)
+    flat_models = {}
+    for model_name, exp_name in FLAT_MODELS:
+        res = evaluate_flat(model_name, exp_name, args.data_root, args.device)
+        if res is not None:
+            flat_models[model_name] = res
+
     hier = evaluate_hierarchical(args.data_root, args.device)
 
     out = ROOT / "experiments/resnet50_hierarchical/test_metrics.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"flat": flat, "hierarchical": hier}, indent=2, ensure_ascii=False),
-                   encoding="utf-8")
+    out.write_text(
+        json.dumps({"flat_models": flat_models, "hierarchical": hier}, indent=2, ensure_ascii=False),
+        encoding="utf-8")
     print("\nSacuvano:", out)
 
 
