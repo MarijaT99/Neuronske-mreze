@@ -41,6 +41,7 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="uzmi samo N primera (za brzu probu)")
     ap.add_argument("--no-pretrained", action="store_true")
     ap.add_argument("--use-class-weights", action="store_true")
+    ap.add_argument("--num-workers", type=int, default=2)
     args = ap.parse_args()
 
     out_dir = args.out_dir or f"experiments/{args.model}_flat"
@@ -52,8 +53,8 @@ def main():
         train_ds.df = train_ds.df.sample(n=args.limit, random_state=42).reset_index(drop=True)
         val_ds.df = val_ds.df.sample(n=max(args.limit // 4, 40), random_state=42).reset_index(drop=True)
 
-    train_loader = build_loader(train_ds, batch_size=args.batch_size, shuffle=True)
-    val_loader = build_loader(val_ds, batch_size=args.batch_size, shuffle=False)
+    train_loader = build_loader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
+    val_loader = build_loader(val_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
 
     model = build_model(args.model, num_classes=38, pretrained=not args.no_pretrained)
     weight = compute_class_weights(train_ds, 38) if args.use_class_weights else None

@@ -19,5 +19,10 @@ def build_dataset(data_root, splits_dir, which, target="flat", img_size=224):
 
 def build_loader(dataset, batch_size=32, shuffle=False, num_workers=0):
     return DataLoader(
-        dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle,
+        num_workers=num_workers,
+        pin_memory=True,                       # brži prenos na GPU
+        persistent_workers=num_workers > 0,    # ne gasi radnike posle svake epohe
     )

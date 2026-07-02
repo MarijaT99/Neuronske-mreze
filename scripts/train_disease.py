@@ -28,6 +28,7 @@ def main():
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--no-pretrained", action="store_true")
+    ap.add_argument("--num-workers", type=int, default=2)
     args = ap.parse_args()
 
     maps = json.loads(Path("data/splits/label_maps.json").read_text(encoding="utf-8"))
@@ -48,8 +49,8 @@ def main():
             train_ds.df = train_ds.df.head(args.limit).reset_index(drop=True)
             val_ds.df = val_ds.df.head(max(args.limit // 4, 20)).reset_index(drop=True)
 
-        train_loader = build_loader(train_ds, batch_size=args.batch_size, shuffle=True)
-        val_loader = build_loader(val_ds, batch_size=args.batch_size, shuffle=False)
+        train_loader = build_loader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
+        val_loader = build_loader(val_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
 
         model = build_model(args.model, num_classes=num_diseases, pretrained=not args.no_pretrained)
         out_dir = f"experiments/{args.model}_hierarchical/disease/{species}"
