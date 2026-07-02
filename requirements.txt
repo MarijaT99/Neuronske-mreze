@@ -1,0 +1,26 @@
+# Duboko učenje
+torch>=2.1.0
+torchvision>=0.16.0
+timm>=0.9.12
+
+# Podaci / augmentacija
+albumentations>=1.4.0
+opencv-python-headless>=4.9.0
+Pillow>=10.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Metrike
+scikit-learn>=1.3.0
+
+# Vizuelizacija
+matplotlib>=3.7.0
+seaborn>=0.13.0
+
+# Interpretabilnost
+grad-cam>=1.5.0
+
+# Konfiguracija / notebook
+PyYAML>=6.0
+jupyter>=1.0.0
+tqdm>=4.66.0

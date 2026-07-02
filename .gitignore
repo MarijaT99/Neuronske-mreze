@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Podaci i težine modela (preveliki za git)
+data/raw/
+*.pt
+*.pth
+*.ckpt
+
+# Editor / OS
+.vscode/
+.ipynb_checkpoints/
+.DS_Store
+
+# Logovi treniranja
+*.log
+wandb/
+runs/
