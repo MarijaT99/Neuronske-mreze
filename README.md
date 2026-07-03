@@ -185,11 +185,30 @@ i **propagacijom greške** (udeo grešaka koje potiču od pogrešno prepoznate v
 
 ## 8. Rezultati
 
-Kompletne test metrike su u `experiments/resnet50_hierarchical/test_metrics.json`,
-a figure u `results/`. Hijerarhijski pristup nadmašuje flat baseline po macro F1,
-uz gotovo savršeno prepoznavanje vrste na prvom nivou. Detaljna tabela poređenja i
-diskusija nalaze se u radu (`paper/`).
 
+Rezultati na **test skupu** (15% podataka, nije korišćen tokom treninga).
+Primarna metrika je **macro F1**.
+
+| Model | Macro F1 | Weighted F1 | Accuracy |
+|---|---|---|---|
+| Baseline CNN (flat) | 0.9707 | 0.9806 | 0.9805 |
+| ResNet-50 (flat) | 0.9868 | 0.9904 | 0.9904 |
+| EfficientNet-B0 (flat) | 0.9885 | 0.9910 | 0.9910 |
+| **Hijerarhijski (ResNet-50)** | **0.9954** | **0.9973** | **0.9973** |
+
+Hijerarhijski pristup postiže najviši macro F1. Vrsta biljke se prepoznaje gotovo
+savršeno (macro F1 ≈ 0.9992); od ukupno **22 greške** na test skupu, **5 (23%)**
+potiče od pogrešno prepoznate vrste (propagacija greške na prvom nivou).
+
+Figure (u `results/`, generisane pomoću `scripts/make_figures.py`):
+- `training_curves_flat.png` - krive treninga flat modela (val macro F1 i train loss)
+- `model_comparison_test.png` - poređenje modela na test skupu
+- `per_class_f1_bar.png` - F1 po klasi (analiza grešaka)
+- `error_propagation.png` - poreklo grešaka hijerarhije (vrsta vs bolest)
+- `disease_models_f1.png` - F1 disease modela po vrsti
+- `confusion_flat.png` - konfuziona matrica (ResNet-50 flat)
+
+Kompletne metrike: `experiments/resnet50_hierarchical/test_metrics.json`.
 ---
 
 ## 9. Napomena o težinama modela
