@@ -82,11 +82,19 @@ def evaluate_flat(model_name, exp_name, data_root, device):
             RESULTS / "per_class_f1.csv", index=False, encoding="utf-8")
 
         cm = confusion_matrix(y_true, y_pred)
-        plt.figure(figsize=(12, 10))
-        plt.imshow(cm, cmap="Blues"); plt.colorbar()
-        plt.title("Konfuziona matrica (flat, test)")
-        plt.xlabel("predvidjeno"); plt.ylabel("stvarno")
-        plt.savefig(RESULTS / "confusion_flat.png", dpi=120, bbox_inches="tight"); plt.close()
+        _, _, id2class, _ = load_maps()
+        class_names = [id2class[i].replace("___", " / ") for i in range(len(cm))]
+        fig, ax = plt.subplots(figsize=(16, 14))
+        im = ax.imshow(cm, cmap="Blues")
+        fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+        ax.set_title("Konfuziona matrica (flat, test)")
+        ax.set_xlabel("Predviđeno"); ax.set_ylabel("Stvarno")
+        ax.set_xticks(range(len(class_names)))
+        ax.set_yticks(range(len(class_names)))
+        ax.set_xticklabels(class_names, rotation=90, fontsize=6)
+        ax.set_yticklabels(class_names, fontsize=6)
+        plt.savefig(RESULTS / "confusion_flat.png", dpi=150, bbox_inches="tight")
+        plt.close()
     return metrics
 
 
