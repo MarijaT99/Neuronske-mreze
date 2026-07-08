@@ -130,6 +130,8 @@ def evaluate_hierarchical(data_root, device):
 
     result = {
         "end_to_end_macro_f1": e2e["macro_f1"],
+        "end_to_end_macro_precision": e2e["macro_precision"],
+        "end_to_end_macro_recall": e2e["macro_recall"],
         "end_to_end_weighted_f1": e2e["weighted_f1"],
         "end_to_end_accuracy": e2e["accuracy"],
         "species_macro_f1": sp_metrics["macro_f1"],
