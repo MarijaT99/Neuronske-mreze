@@ -81,8 +81,13 @@ def evaluate_flat(model_name, exp_name, data_root, device):
         pd.DataFrame({"class": [id2class[i] for i in range(38)], "f1": per}).to_csv(
             RESULTS / "per_class_f1.csv", index=False, encoding="utf-8")
 
+        # sacuvaj predikcije flat modela (za offline racunanje bilo koje metrike)
+        pd.DataFrame({"y_true": y_true, "y_pred": y_pred,
+                      "true_name": [id2class[i] for i in y_true],
+                      "pred_name": [id2class[i] for i in y_pred]}).to_csv(
+            RESULTS / "predictions_flat.csv", index=False, encoding="utf-8")
+
         cm = confusion_matrix(y_true, y_pred)
-        _, _, id2class, _ = load_maps()
         class_names = [id2class[i].replace("___", " / ") for i in range(len(cm))]
         fig, ax = plt.subplots(figsize=(16, 14))
         im = ax.imshow(cm, cmap="Blues")
@@ -129,6 +134,33 @@ def evaluate_hierarchical(data_root, device):
         m["class_to_id"][f"{id2species[sp]}___{id2disease[id2species[sp]][dl]}"]
         for sp, dl in zip(sp_all, dis_all)
     ])
+
+    # sacuvaj predikcije hijerarhije (offline racunanje metrika, bez retreniranja)
+    pd.DataFrame({"filepath": test_df["filepath"].to_numpy(),
+                  "y_true": true_class, "y_pred": pred_class,
+                  "true_name": [id2class[i] for i in true_class],
+                  "pred_name": [id2class[i] for i in pred_class]}).to_csv(
+        RESULTS / "predictions_hier.csv", index=False, encoding="utf-8")
+
+    # kvalitativna analiza gresaka: primeri pogresno klasifikovanih slika
+    from PIL import Image
+    wrong_idx = np.where(pred_class != true_class)[0]
+    if len(wrong_idx):
+        rng = np.random.default_rng(42)
+        sel = rng.choice(wrong_idx, size=min(12, len(wrong_idx)), replace=False)
+        fig, axes = plt.subplots(3, 4, figsize=(14, 11))
+        for ax, idx in zip(axes.ravel(), sel):
+            row = test_df.iloc[int(idx)]
+            ax.imshow(Image.open(f"{data_root}/{row['filepath']}").convert("RGB"))
+            ax.axis("off")
+            t = id2class[int(true_class[idx])].replace("___", " / ")
+            p = id2class[int(pred_class[idx])].replace("___", " / ")
+            ax.set_title(f"Stvarno: {t}\nPredviđeno: {p}", fontsize=7, color="crimson")
+        for ax in axes.ravel()[len(sel):]:
+            ax.axis("off")
+        plt.tight_layout()
+        plt.savefig(RESULTS / "misclassified_examples.png", dpi=150, bbox_inches="tight")
+        plt.close()
 
     e2e = compute_metrics(true_class, pred_class)
     sp_metrics = compute_metrics(true_species, sp_all)
